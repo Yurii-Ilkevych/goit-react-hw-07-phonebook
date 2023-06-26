@@ -4,10 +4,10 @@ import {
   selectContacts,
   selectIsLoading,
   selectError,
-  selectVisibleContacts
-} from 'components/redux/selectors'; 
-import { deleteContact, fetchContacts } from 'components/redux/operators';
-import { useEffect} from 'react';
+  selectVisibleContacts,
+} from 'redux/selectors';
+import { deleteContact, fetchContacts } from 'redux/operators';
+import { useEffect } from 'react';
 
 const ContactList = () => {
   const dispatch = useDispatch();

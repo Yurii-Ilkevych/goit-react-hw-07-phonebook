@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { selectContacts } from 'components/redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { Form, Name, Number, Submit, Wrapper } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'components/redux/operators';
+import { addContact } from 'redux/operators';
 
 function ContactForm() {
   const [name, setName] = useState('');
@@ -32,7 +32,6 @@ function ContactForm() {
 
   const isAddedContact = contact => {
     if (addedContacts.length !== 0) {
-
       for (const addcontact of addedContacts) {
         if (addcontact.contact.name.includes(contact.name)) {
           alert(`${contact.name} "is already in contacts"`);
