@@ -1,14 +1,13 @@
 import { Wrapper, List, Item, WrapperItem, Delete } from './ContactList.styled';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   selectContacts,
   selectIsLoading,
   selectError,
-} from '../redux/selectors';
-import { selectVisibleContacts } from '../redux/selectors';
-import { useDispatch } from 'react-redux';
+  selectVisibleContacts
+} from 'components/redux/selectors'; 
 import { deleteContact, fetchContacts } from 'components/redux/operators';
-import { useEffect } from 'react';
+import { useEffect} from 'react';
 
 const ContactList = () => {
   const dispatch = useDispatch();
