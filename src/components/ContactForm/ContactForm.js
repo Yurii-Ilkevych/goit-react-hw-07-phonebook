@@ -1,22 +1,15 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { nanoid } from 'nanoid';
-import { getContacts } from 'components/redux/selectors';
+import { selectContacts } from 'components/redux/selectors';
 import { Form, Name, Number, Submit, Wrapper } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
 import { addContact } from 'components/redux/operators';
 
-
-
-
-
-
-
-
 function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const addedContacts = useSelector(getContacts)
+  const addedContacts = useSelector(selectContacts);
   const dispatch = useDispatch();
 
   const hundleSubmit = evt => {
@@ -27,25 +20,31 @@ function ContactForm() {
       name,
       number,
     };
-    
-     const addcontacts = getAddedContacts(addedContacts)
 
-    if(addcontacts !== null && addcontacts.length !== 0){
-    for (const addcontact of addcontacts) {
-      if (addcontact.contact.name.includes(contact.name)) {
-        alert(`${contact.name} "is already in contacts"`);
-        return;
-      }
+    const isContact = isAddedContact(contact);
+    if (isContact) {
+      return;
+    } else {
+      dispatch(addContact(contact));
+      resetValue();
     }
-    }
-    
-    dispatch(addContact(contact))
-    resetValue();
   };
-  const getAddedContacts = (addedContacts)=>{
-    return addedContacts
-  }
-  
+
+  const isAddedContact = contact => {
+    if (addedContacts.length !== 0) {
+
+      for (const addcontact of addedContacts) {
+        if (addcontact.contact.name.includes(contact.name)) {
+          alert(`${contact.name} "is already in contacts"`);
+          return true;
+        } else {
+          return false;
+        }
+      }
+    } else {
+      return false;
+    }
+  };
 
   const handleValue = evt => {
     const { name, value } = evt.currentTarget;
